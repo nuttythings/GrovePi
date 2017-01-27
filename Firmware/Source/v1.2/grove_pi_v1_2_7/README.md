@@ -1,35 +1,5 @@
-## GrovePi Firmware version 1.2.6 - Mar 2016
-
-GrovePi is an open source platform for connecting Grove Sensors to the Raspberry Pi.  [See more about the GrovePi here.](http://www.dexterindustries.com/grovepi)
-
-##Changes in 1.2.6
-* Support for Chainable RGB LED added
-* Support for 433Mhz RF module added
-* Ultrasonic sensor code updated
-
-## Updating the firmware on your GrovePi
-To Test the 1.2.6 firmware, make the installation script executable and run it 
-
-First make the update script executable:
-
-**sudo chmod +x install_test_firmware_software.sh**
-
-then run it:
-
-**sudo ./firmware_update.sh**
-
-This will install the 1.2.6 firmware on the GrovePi and update the GrovePi python library. 
-## Learn More
-
-See more at the [GrovePi Site](http://www.GrovePi.com/)
-[Dexter Industries](http://www.dexterindustries.com)
-
-##Contributors
-The following github users have contributed to the changes on the firmware and software:
-* @tkumata
-* @nikkoura
-* @KillingJacky
-
+## GrovePi Firmware version 1.2.7 - Dec 2016
+'''
 ## License
 
 The MIT License (MIT)
@@ -53,13 +23,24 @@ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
-
+'''
+Binary sketch size: 14,504 bytes (of a 32,256 byte maximum)
 
 ### Changes
 
-* Adds Grove 433MHz simple link transmitter
+* Faster IO (upto 300 reads/writes a second)
+* Less IO Errors
+* Support for RTC and MMA7xxx accelerometer removed from firmware and moved to Software
 
+### Installation
+* First run DI update from the Desktop. (If you are not running Raspbian for Robots, first update the GrovePi git repository, then run setup.py from [here](https://github.com/DexterInd/GrovePi/tree/master/Software/Python to update the grovepi python library): **sudo python setup.py install**
+* Next run the firmware update script for v1.2.7.
+* Go to the fimrware 1.2.7 folder [here] https://github.com/DexterInd/GrovePi/tree/master/Firmware/Source/v1.2/grove_pi_v1_2_7)
+* Make the firmware update script executable: **sudo chmod +x firmware_update_1_2_7.sh**
+* then run it: **sudo ./firmware_update_1_2_7.sh**
+* After this, run the firmware check script [here]( https://github.com/DexterInd/GrovePi/blob/master/Software/Python/grove_firmware_version_check.py) to make sure that you are running 1.2.7. 
+
+In case of any problems with the firmware, just run the firmware update [here](https://github.com/karan259/GrovePi/tree/master/Firmware) to go back to the stable firmware and report the problems on the [forums](http://forum.dexterindustries.com/c/grovepi)
 
 ### Commands
 
@@ -71,15 +52,7 @@ THE SOFTWARE.
 | Analog write                        | 4     | pin      | value       | _unused_     | Writes an analog value (PWM wave) to a pin              |
 | Pin mode                            | 5     | pin      | pin mode    | _unused_     | Configure a pin to behave either as input or output     |
 | Ultrasonic read                     | 7     | pin      | _unused_    | _unused_     | Get the distance in cm                                  |
-| Dust sensor read                    | 10    | _unused_ | _unused_    | _unused_     | Read the dust concentration in air                      |
-| Encoder read                        | 11    | _unused_ | _unused_    | _unused_     | Read the encoder position                               |
-| Flow read                           | 12    | _unused_ | _unused_    | _unused_     | Read the flow rate                                      |
-| Flow disable                        | 13    | _unused_ | _unused_    | _unused_     | Disable the flow meter                                  |
-| Dust sensor enable                  | 14    | _unused_ | _unused_    | _unused_     | Enable the dust sensor                                  |
-| Dust sensor disable                 | 15    | _unused_ | _unused_    | _unused_     | Disable the dust sensor                                 |
-| Encoder enable                      | 16    | _unused_ | _unused_    | _unused_     | Enable the encoder                                      |
-| Encoder disable                     | 17    | _unused_ | _unused_    | _unused_     | Disable the encoder                                     |
-| Flow enable                         | 18    | _unused_ | _unused_    | _unused_     | Enable the flow meter                                   |
+| Firmware version                    | 8     | _unused_ | _unused_    | _unused_     | Get the firmware version                                |
 | Accelerometer read                  | 20    | pin      | _unused_    | _unused_     | Get X, Y and Z from the 1.5g accelerometer              |
 | RTC read                            | 30    | pin      | _unused_    | _unused_     | Get the time and date from the RTC                      |
 | DHT read                            | 40    | pin      | dht type    | _unused_     | Read the temperature and humidity                       |
@@ -106,10 +79,6 @@ THE SOFTWARE.
 | Chainable RGB set LEDs with pattern | 93    | pin      | pattern     | which led    | Set color using pattern: 0 this LED only, 1: all except this, 2: this and all inwards, 3: this and all outwards |
 | Chainable RGB set LEDs with modulo  | 94    | pin      | offset      | divisor      | Set color on all LEDs >= offset when mod remainder is 0 |
 | Chainable RGB set level             | 95    | pin      | level       | reverse      | Set color on all LEDs <= level, outwards unless reverse |
-| 433 MHz transmitter init            | 100   | 1        | pin         | _unused_     | Initialize transmitter                                  |
-| 433 MHz transmitter set buffer size | 100   | 2        | size        | _unused_     | Prepare empty buffer to store message                   |
-| 433 MHz transmitter transmit buffer | 100   | 3        | _unused_    | _unused_     | Transmit buffer contents                                |
-| 433 MHz transmitter fill buffer     | 101   | byte 1   | byte 2      | byte 3       | Append 3 bytes to buffer                                |
 
 
 ### Library Dependencies
@@ -120,4 +89,3 @@ THE SOFTWARE.
 * [Grove_LED_bar](https://github.com/Seeed-Studio/Grove_LED_Bar)
 * [TM1637](https://github.com/mcauser/TM1637-led-driver-7-segment)
 * [Chainable_RGB_LED](https://github.com/mcauser/Grove-Chainable-RGB-LED)
-* [VirtualWire](http://www.airspayce.com/mikem/arduino/VirtualWire/)
